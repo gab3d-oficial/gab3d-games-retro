@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Gab 3D · Emulador</title>
+  <!--
+    Tocador de ROMs HOMEBREW com distribuição autorizada.
+    Usa o EmulatorJS (https://emulatorjs.org) pela CDN oficial.
+    Só aceita arquivos dentro da pasta /roms deste site.
+  -->
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; overflow: hidden; touch-action: none; }
+    #game { width: 100%; height: 100%; }
+    .erro { color: #E6ECF7; font: 12px/1.6 monospace; padding: 16px; }
+  </style>
+</head>
+<body>
+  <div id="game"></div>
+  <script>
+  (function () {
+    'use strict';
+    var p = new URLSearchParams(location.search);
+    var rom = p.get('rom') || '';
+    var core = p.get('core') || 'snes';
+
+    // segurança: só ROMs locais da pasta /roms, sem "..", e core alfanumérico
+    if (!/^roms\/[A-Za-z0-9_\-\/.]+$/.test(rom) || rom.indexOf('..') !== -1 || !/^[A-Za-z0-9]+$/.test(core)) {
+      document.body.innerHTML = '<p class="erro">Cartucho inválido. Confira o "caminho" no games.json.</p>';
+      return;
+    }
+
+    var CDN = 'https://cdn.emulatorjs.org/stable/data/';
+    window.EJS_player = '#game';
+    window.EJS_core = core;
+    window.EJS_gameUrl = rom;
+    window.EJS_pathtodata = CDN;
+    window.EJS_startOnLoaded = true;
+    window.EJS_color = '#1E7BFF';
+    window.EJS_backgroundColor = '#000000';
+    // o portátil Gab 3D já tem controle próprio na tela
+    window.EJS_defaultOptions = { 'virtual-gamepad': 'disabled' };
+
+    // botões Gab 3D -> índices do RetroPad
+    var INDICE = { b: 0, select: 2, start: 3, up: 4, down: 5, left: 6, right: 7, a: 8 };
+
+    window.addEventListener('message', function (e) {
+      if (e.source !== window.parent) return;
+      var d = e.data || {};
+      var emu = window.EJS_emulator;
+      if (!emu) return;
+      try {
+        if (d.gab === 'input' && d.btn in INDICE) {
+          emu.gameManager.simulateInput(0, INDICE[d.btn], d.down ? 1 : 0);
+        } else if (d.gab === 'mute') {
+          emu.setVolume(d.value ? 0 : 0.5);
+        }
+      } catch (err) { console.warn('Gab 3D -> EmulatorJS:', err); }
+    });
+
+    var s = document.createElement('script');
+    s.src = CDN + 'loader.js';
+    s.onerror = function () {
+      document.body.innerHTML = '<p class="erro">Não foi possível carregar o emulador. Verifique a internet.</p>';
+    };
+    document.body.appendChild(s);
+  })();
+  </script>
+</body>
+</html>

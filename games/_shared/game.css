@@ -1,0 +1,10 @@
+/* base comum dos jogos HTML5 Gab 3D */
+html, body {
+  margin: 0; height: 100%; background: #05070D; overflow: hidden;
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+body { display: flex; align-items: center; justify-content: center; }
+canvas {
+  display: block; width: 100%; height: 100%; object-fit: contain;
+  image-rendering: pixelated; image-rendering: crisp-edges;
+}

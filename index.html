@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Gab 3D Games Retrô</title>
+  <meta name="description" content="Plataforma de jogos retrô da Gab 3D. Encoste o mini cartucho NFC no celular e jogue na hora.">
+  <meta name="theme-color" content="#0A0F1C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gab 3D Games">
+  <meta property="og:title" content="Gab 3D Games Retrô">
+  <meta property="og:description" content="Encoste o cartucho. Aperte JOGAR.">
+  <meta property="og:image" content="assets/og.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icone-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Russo+One&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-view="home">
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- ===================== TELA INICIAL ===================== -->
+  <section id="view-home" class="view">
+    <header class="topbar">
+      <a class="brand" href="#/" aria-label="Gab 3D Games Retrô — início">
+        <span class="brand-mark">G3D</span>
+        <span class="brand-text">GAB 3D <b>GAMES RETRÔ</b></span>
+      </a>
+      <span class="top-pill"><i></i>INSIRA O CARTUCHO</span>
+    </header>
+
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">▶ MINI CARTUCHOS NFC</p>
+        <h1>Encoste o cartucho.<br><span>Aperte JOGAR.</span></h1>
+        <p class="lead">Cada mini cartucho Gab 3D tem um chip NFC. Encoste no celular, o jogo abre na hora com controle na tela. Sem instalar nada, no Android e no iPhone.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-scroll="#biblioteca">▶ VER JOGOS</button>
+          <button class="btn btn-ghost" data-scroll="#como-funciona">COMO FUNCIONA</button>
+        </div>
+      </div>
+
+      <div class="console" aria-hidden="true">
+        <div class="console-cart"><div class="label"><span>G3D</span></div></div>
+        <div class="console-body">
+          <div class="console-slot"></div>
+          <div class="sw power"><small>POWER</small></div>
+          <div class="sw reset"><small>RESET</small></div>
+          <div class="console-led"></div>
+          <div class="console-badge">GAB 3D · 16-BIT</div>
+          <div class="console-stripe"></div>
+        </div>
+        <div class="console-pad"><i class="cross"></i><i class="b1"></i><i class="b2"></i></div>
+      </div>
+    </div>
+
+    <section id="biblioteca" class="library">
+      <div class="section-head">
+        <h2 class="section-title">BIBLIOTECA</h2>
+        <span class="section-count" id="game-count"></span>
+      </div>
+      <div id="game-grid" class="game-grid" aria-live="polite">
+        <p class="grid-msg">Carregando cartuchos…</p>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="how">
+      <div class="how-step"><b>01</b><h4>Encoste</h4><p>Aproxime o mini cartucho da parte de trás do celular, perto da câmera.</p></div>
+      <div class="how-step"><b>02</b><h4>Abra o link</h4><p>No Android o jogo abre direto. No iPhone, toque na notificação que aparece no topo.</p></div>
+      <div class="how-step"><b>03</b><h4>Aperte JOGAR</h4><p>Use o direcional e os botões A e B na tela. Vire o celular de lado para jogar em tela larga.</p></div>
+    </section>
+
+    <footer>
+      <span>© <span id="ano"></span> Gab 3D · Ideias ganham forma</span>
+      <span>Jogos originais e homebrew com distribuição autorizada.</span>
+    </footer>
+  </section>
+
+  <!-- ===================== TELA DO JOGO ===================== -->
+  <section id="view-game" class="view" hidden>
+    <div class="handheld">
+      <div class="hh-bar">
+        <button class="hh-icon" id="btn-back" aria-label="Voltar para a biblioteca">◀</button>
+        <span class="hh-title" id="game-title">—</span>
+        <button class="hh-icon" id="btn-mute" aria-label="Ligar ou desligar o som">♪</button>
+        <button class="hh-icon" id="btn-full" aria-label="Tela cheia">⛶</button>
+      </div>
+
+      <div class="hh-bezel">
+        <div class="hh-led" id="power-led" title="Power"></div>
+        <div class="hh-screen crt" id="screen">
+          <div id="stage" class="stage"></div>
+          <div id="insert" class="insert">
+            <img id="insert-cover" alt="">
+            <h2 id="insert-title"></h2>
+            <p id="insert-desc"></p>
+            <button id="btn-play" class="btn-play">▶ JOGAR</button>
+            <p class="insert-hint" id="insert-hint">ou aperte A / START</p>
+          </div>
+        </div>
+        <div class="hh-bezel-label">GAB 3D · PIXEL SCREEN</div>
+      </div>
+
+      <div class="hh-logo">GAB 3D<em>retrô</em></div>
+
+      <div class="hh-controls" id="controls">
+        <div class="dpad" id="dpad" role="group" aria-label="Direcional">
+          <span class="d up"></span><span class="d down"></span>
+          <span class="d left"></span><span class="d right"></span>
+          <span class="d-center"></span>
+        </div>
+        <div class="meta-btns">
+          <button class="pill" data-btn="select" aria-label="Select">SELECT</button>
+          <button class="pill" data-btn="start" aria-label="Start">START</button>
+        </div>
+        <div class="ab">
+          <button class="round b" data-btn="b" aria-label="Botão B">B</button>
+          <button class="round a" data-btn="a" aria-label="Botão A">A</button>
+        </div>
+      </div>
+
+      <div class="hh-speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <p class="kbd-hint">TECLADO: SETAS · X = A · Z = B · ENTER = START · SHIFT = SELECT</p>
+  </section>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

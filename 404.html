@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gab 3D Games Retrô</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0A0F1C; color: #E6ECF7; font: 14px/1.6 system-ui, sans-serif; text-align: center; padding: 24px; }
+    a { color: #FF8A1A; }
+  </style>
+  <script>
+    // Permite links curtos como  https://seudominio.com.br/jogo/cobrinha
+    // O GitHub Pages entrega esta página para caminhos que não existem;
+    // aqui convertemos para o formato com # que o site entende.
+    (function () {
+      var p = location.pathname;
+      var i = p.indexOf('/jogo/');
+      var base;
+      if (i >= 0) {
+        base = p.slice(0, i + 1);
+        var slug = p.slice(i + 6).replace(/\/+$/, '');
+        location.replace(base + '#/jogo/' + encodeURIComponent(slug));
+        return;
+      }
+      // fallback: volta para a página inicial do site
+      if (/\.github\.io$/.test(location.hostname)) {
+        var seg = p.split('/').filter(Boolean)[0];
+        base = seg ? '/' + seg + '/' : '/';
+      } else {
+        base = '/';
+      }
+      window.__base = base;
+    })();
+  </script>
+</head>
+<body>
+  <div>
+    <p>Página não encontrada.</p>
+    <p><a href="/" onclick="this.href=window.__base||'/'">Voltar para a biblioteca Gab 3D</a></p>
+  </div>
+</body>
+</html>

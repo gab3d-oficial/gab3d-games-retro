@@ -1,0 +1,16 @@
+{
+  "name": "Gab 3D Games Retrô",
+  "short_name": "Gab 3D Games",
+  "description": "Jogos retrô dos mini cartuchos NFC Gab 3D",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0A0F1C",
+  "theme_color": "#0A0F1C",
+  "icons": [
+    { "src": "assets/icone.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icone-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

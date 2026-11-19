@@ -1,0 +1,48 @@
+{
+  "versao": 1,
+  "observacao": "Catálogo de cartuchos. Cada item vira um card na biblioteca e um link #/jogo/<id> para gravar no NFC. O 'id' NUNCA deve mudar depois que a tag for gravada.",
+  "jogos": [
+    {
+      "id": "cobrinha",
+      "titulo": "Cobrinha Neon",
+      "descricao": "Coma as frutas, cresça e não bata nas paredes. A fruta dourada vale 5 pontos.",
+      "controles": "Direcional move · segure A para acelerar · START pausa",
+      "capa": "assets/capas/cobrinha.svg",
+      "tipo": "html5",
+      "caminho": "games/cobrinha/index.html",
+      "cor": "#1FB86A",
+      "console": "GAB 3D",
+      "autor": "Gab 3D",
+      "licenca": "Original Gab 3D"
+    },
+    {
+      "id": "quebra-blocos",
+      "titulo": "Quebra-Blocos",
+      "descricao": "Rebata a bolinha e destrua todos os blocos. A cada fase fica mais rápido.",
+      "controles": "Direcional move · A lança · segure B para correr",
+      "capa": "assets/capas/quebra-blocos.svg",
+      "tipo": "html5",
+      "caminho": "games/quebra-blocos/index.html",
+      "cor": "#FF8A1A",
+      "console": "GAB 3D",
+      "autor": "Gab 3D",
+      "licenca": "Original Gab 3D"
+    },
+    {
+      "id": "exemplo-homebrew",
+      "ativo": false,
+      "titulo": "Exemplo Homebrew (desativado)",
+      "descricao": "Modelo de cartucho com ROM homebrew. Troque os dados, coloque a ROM em /roms e mude 'ativo' para true.",
+      "controles": "Direcional · A · B · START · SELECT",
+      "capa": "assets/capas/padrao.svg",
+      "tipo": "rom",
+      "core": "snes",
+      "caminho": "roms/nome-do-jogo.sfc",
+      "cor": "#1E7BFF",
+      "console": "16-BIT",
+      "autor": "Nome do autor",
+      "licenca": "Ex.: CC-BY 4.0 / MIT / permissão por escrito (guarde o print)",
+      "fonte": "https://link-da-pagina-oficial-do-jogo"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Modelo de jogo · Gab 3D</title>
+  <link rel="stylesheet" href="../_shared/game.css">
+</head>
+<body>
+  <!-- COPIE ESTA PASTA para criar um jogo novo (ex.: games/meu-jogo/) -->
+  <canvas id="tela" width="160" height="144"></canvas>
+  <script src="../_shared/gab-input.js"></script>
+  <script src="../_shared/gab-audio.js"></script>
+  <script src="../_shared/gab-font.js"></script>
+  <script>
+    // Exemplo mínimo: um quadrado que anda com o direcional e muda de cor com A.
+    var g = document.getElementById('tela').getContext('2d');
+    var x = 76, y = 66, cores = ['#FF8A1A', '#1E7BFF', '#39FF88'], c = 0;
+    GabInput.on('press', function (b) { if (b === 'a') { c = (c + 1) % cores.length; GabAudio.beep(660, 0.06); } });
+    function quadro() {
+      if (GabInput.down.left) x -= 1.5;
+      if (GabInput.down.right) x += 1.5;
+      if (GabInput.down.up) y -= 1.5;
+      if (GabInput.down.down) y += 1.5;
+      g.fillStyle = '#0A0F1C'; g.fillRect(0, 0, 160, 144);
+      GabFont.draw(g, 'OLA, CARTUCHO!', 80, 10, { cor: '#E6ECF7', align: 'center' });
+      g.fillStyle = cores[c]; g.fillRect(Math.round(x), Math.round(y), 8, 8);
+      requestAnimationFrame(quadro);
+    }
+    quadro();
+  </script>
+</body>
+</html>

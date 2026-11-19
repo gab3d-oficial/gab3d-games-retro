@@ -1,0 +1,12 @@
+PASTA DE ROMS HOMEBREW — GAB 3D GAMES RETRÔ
+
+Coloque aqui SOMENTE jogos homebrew cuja licença permita redistribuição
+(e uso comercial, já que os cartuchos são vendidos), ou com permissão
+por escrito do autor. NUNCA coloque ROMs de jogos comerciais.
+
+Para cada ROM, guarde junto:
+  - nome-do-jogo.sfc             (a ROM)
+  - nome-do-jogo.LICENCA.txt     (cópia da licença ou print da autorização)
+
+Depois cadastre no games/games.json com "tipo": "rom".
+Extensões aceitas pelo core SNES: .sfc .smc  (Game Boy: .gb / .gbc)
