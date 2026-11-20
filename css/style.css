@@ -74,10 +74,7 @@ button { font: inherit; color: inherit; }
 }
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0 18px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand-mark {
-  font-family: var(--brand); font-size: 15px; background: var(--blue); color: #fff;
-  padding: 8px 9px; border-radius: 8px; box-shadow: 3px 3px 0 var(--orange);
-}
+.brand-logo { width: 40px; height: auto; image-rendering: pixelated; display: block; filter: drop-shadow(0 0 10px rgba(30,123,255,.35)); }
 .brand-text { font-family: var(--brand); font-size: 18px; letter-spacing: .04em; }
 .brand-text b { color: var(--orange); font-weight: 400; }
 .top-pill {
@@ -127,7 +124,9 @@ button { font: inherit; color: inherit; }
   box-shadow: inset 0 0 0 2px rgba(255,255,255,.3); overflow: hidden;
   font-family: var(--brand); color: #fff; font-size: clamp(14px, 2.6vw, 22px);
 }
-.console-cart .label::after { content: ""; position: absolute; left: 0; right: 0; bottom: 12%; height: 12%; background: var(--orange); }
+.console-cart .label { background: linear-gradient(135deg, #16224A, #0A0F1C); }
+.console-cart .label img { width: 38%; height: auto; image-rendering: pixelated; position: relative; z-index: 1; margin-bottom: 10%; }
+.console-cart .label::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8%; height: 10%; background: linear-gradient(90deg, var(--blue) 0 50%, var(--orange) 50%); }
 @keyframes cartIn { 0%, 15% { transform: translateY(-34%); } 45%, 85% { transform: translateY(0); } 100% { transform: translateY(-34%); } }
 .sw {
   position: absolute; top: 20%; width: 15%; height: 15%;
@@ -270,7 +269,20 @@ body[data-view="game"] { overflow: hidden; overscroll-behavior: none; position: 
 @keyframes pulse { 50% { transform: scale(1.06); } }
 .insert-hint { font-family: var(--pixel); font-size: 7px; color: #6F7EA3; margin: 2px 0 0 !important; }
 
-.hh-logo { grid-area: logo; font-family: var(--brand); font-size: 19px; line-height: 1; color: #2F3B63; letter-spacing: .04em; padding-left: 6px; }
+.hh-logo { grid-area: logo; display: flex; align-items: center; gap: 8px; font-family: var(--brand); font-size: 19px; line-height: 1; color: #2F3B63; letter-spacing: .04em; padding-left: 6px; }
+.hh-logo img { height: 24px; width: auto; image-rendering: pixelated; }
+
+/* ---------- abertura Gab 3D (ao apertar JOGAR) ---------- */
+.boot {
+  position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: #0A0F1C; animation: bootOut .35s ease-in 1.55s forwards;
+}
+.boot img { width: 30%; max-width: 120px; image-rendering: pixelated; animation: logoDrop .7s steps(7) both; }
+.boot p { margin: 4px 0 0; font-family: var(--pixel); font-size: clamp(12px, 4vw, 18px); color: #fff; letter-spacing: .12em; animation: bootText .3s steps(2) .75s both; }
+.boot small { font-family: var(--pixel); font-size: clamp(6px, 1.9vw, 8px); color: var(--orange); letter-spacing: .1em; animation: bootText .3s steps(2) 1s both; }
+@keyframes logoDrop { 0% { transform: translateY(-160%); } 80% { transform: translateY(6%); } 100% { transform: translateY(0); } }
+@keyframes bootText { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bootOut { to { opacity: 0; visibility: hidden; } }
 .hh-logo em { font-style: italic; color: var(--orange); font-size: .85em; margin-left: 6px; }
 
 /* ---------- controles ---------- */
@@ -337,6 +349,7 @@ body[data-view="game"] { overflow: hidden; overscroll-behavior: none; position: 
   .hh-screen { flex: 1 1 auto; min-height: 0; height: 100%; width: auto; max-width: 100%; }
   .hh-bezel-label, .kbd-hint { display: none; }
   .hh-logo { align-self: center; font-size: 15px; }
+  .hh-logo img { height: 18px; }
   .hh-speaker { position: static; grid-area: spk; justify-self: end; align-self: center; }
   .hh-speaker i { height: 22px; }
   .hh-bar .hh-icon { height: 28px; }

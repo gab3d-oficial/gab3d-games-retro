@@ -34,6 +34,20 @@ function liberarAudio() {
   } catch (_) {}
 }
 
+// som de abertura Gab 3D (arpejo 8-bit original)
+function somAbertura() {
+  if (mudo) return;
+  const ctx = window.GabAudioCtx; if (!ctx) return;
+  const notas = [[523, 0], [659, 0.09], [784, 0.18], [1047, 0.27], [1568, 0.42]];
+  notas.forEach(([f, t], i) => {
+    const o = ctx.createOscillator(), g = ctx.createGain(), ini = ctx.currentTime + 0.72 + t;
+    const dur = i === notas.length - 1 ? 0.35 : 0.08;
+    o.type = 'square'; o.frequency.setValueAtTime(f, ini);
+    g.gain.setValueAtTime(0.06, ini); g.gain.exponentialRampToValueAtTime(0.0001, ini + dur);
+    o.connect(g); g.connect(ctx.destination); o.start(ini); o.stop(ini + dur + 0.02);
+  });
+}
+
 // ---------------- avisos ----------------
 let toastTimer = null;
 function toast(msg, ms = 2600) {
@@ -109,6 +123,14 @@ function iniciarJogo() {
   liberarAudio();
   jogando = true;
   $('#insert').hidden = true;
+  // abertura Gab 3D por cima enquanto o jogo carrega por baixo
+  const boot = $('#boot');
+  boot.hidden = false;
+  boot.querySelectorAll('*').forEach(el => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; });
+  boot.style.animation = 'none'; void boot.offsetWidth; boot.style.animation = '';
+  somAbertura();
+  clearTimeout(iniciarJogo.t);
+  iniciarJogo.t = setTimeout(() => { boot.hidden = true; }, 1950);
   player.mount($('#stage'), atual, { muted: mudo });
 }
 
@@ -116,6 +138,8 @@ function fecharJogo() {
   player.unmount();
   atual = null;
   jogando = false;
+  clearTimeout(iniciarJogo.t);
+  $('#boot').hidden = true;
   setEnabled(false);
   $('#power-led').classList.remove('on');
   if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
