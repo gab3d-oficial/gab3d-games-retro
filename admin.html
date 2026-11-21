@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel das fitas · Gab 3D</title>
+  <link rel="icon" href="assets/icone.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Russo+One&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy:#0A0F1C; --navy2:#111A2E; --navy3:#1A2540; --blue:#1E7BFF; --orange:#FF8A1A; --light:#E6ECF7; --muted:#AEB9CF; --green:#39FF88; --red:#FF4D6D; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--navy); color: var(--light); font-family: Montserrat, system-ui, sans-serif; padding: 20px 16px 40px; }
+    main { max-width: 900px; margin: 0 auto; }
+    header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    header img { width: 40px; image-rendering: pixelated; }
+    h1 { font-family: 'Russo One', sans-serif; font-weight: 400; font-size: 22px; margin: 0; }
+    h1 b { color: var(--orange); font-weight: 400; }
+    .card { background: var(--navy2); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    input { width: 100%; max-width: 320px; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.15); background: var(--navy); color: var(--light); font-size: 15px; }
+    button { font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 11px 12px; border-radius: 9px; border: 0; cursor: pointer; background: var(--orange); color: #1B0D00; }
+    button.ghost { background: transparent; color: var(--light); box-shadow: inset 0 0 0 1px rgba(255,255,255,.25); }
+    button.red { background: transparent; color: var(--red); box-shadow: inset 0 0 0 1px rgba(255,77,109,.5); }
+    button:disabled { opacity: .5; cursor: default; }
+    .row { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .stat { background: var(--navy3); border-radius: 12px; padding: 14px; }
+    .stat b { display: block; font-family: 'Press Start 2P', monospace; font-size: 18px; color: var(--orange); margin-bottom: 8px; }
+    .stat span { font-size: 12px; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { text-align: left; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    td { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: middle; }
+    td.num { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--orange); }
+    .pill { font-family: 'Press Start 2P', monospace; font-size: 8px; padding: 5px 7px; border-radius: 6px; background: rgba(57,255,136,.12); color: var(--green); white-space: nowrap; }
+    .pill.cheia { background: rgba(255,138,26,.15); color: var(--orange); }
+    .pill.bloq { background: rgba(255,77,109,.15); color: var(--red); }
+    .acoes { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .msg { font-size: 14px; color: var(--muted); }
+    .erro { color: var(--red); }
+    small.data { color: var(--muted); font-size: 12px; }
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: 1fr 1fr 1fr; } .stat b { font-size: 13px; }
+      th:nth-child(3), td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="assets/logo-pixel.svg" alt="">
+    <h1>PAINEL DAS <b>FITAS</b></h1>
+  </header>
+
+  <section class="card" id="entrar">
+    <div class="row">
+      <div style="flex:1; min-width:220px">
+        <label for="senha">Senha do painel (a mesma do segredo ADMIN_SENHA no Cloudflare)</label>
+        <input id="senha" type="password" autocomplete="current-password">
+      </div>
+      <button id="btn-entrar">ENTRAR</button>
+    </div>
+    <p class="msg" id="msg-entrar"></p>
+  </section>
+
+  <section id="painel" hidden>
+    <div class="stats card">
+      <div class="stat"><b id="st-fitas">0</b><span>fitas já usadas</span></div>
+      <div class="stat"><b id="st-aparelhos">0</b><span>aparelhos conectados</span></div>
+      <div class="stat"><b id="st-cheias">0</b><span>fitas no limite</span></div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content: space-between; margin-bottom: 12px">
+        <span class="msg">Fitas que já foram encostadas em algum celular. Limite: <b id="limite">2</b> aparelhos por fita.</span>
+        <div class="row">
+          <button class="ghost" id="btn-atualizar">ATUALIZAR</button>
+          <button class="ghost" id="btn-sair">SAIR</button>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Fita</th><th>Aparelhos</th><th>Primeiro / último uso</th><th></th></tr></thead>
+        <tbody id="lista"></tbody>
+      </table>
+      <p class="msg" id="msg-lista"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var api = '', senha = '';
+  try { senha = sessionStorage.getItem('gab3d.admin') || ''; } catch (e) {}
+
+  function data(ms) {
+    var d = new Date(ms);
+    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  }
+  function n3(n) { return String(n).padStart(3, '0'); }
+
+  function chama(caminho, corpo) {
+    return fetch(api + caminho, {
+      method: corpo ? 'POST' : 'GET',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + senha },
+      body: corpo ? JSON.stringify(corpo) : undefined
+    }).then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); });
+  }
+
+  function carregar() {
+    $('#msg-lista').textContent = 'Carregando…';
+    return chama('/admin/fitas').then(function (r) {
+      if (r._status === 401) { sair(); $('#msg-entrar').innerHTML = '<span class="erro">Senha incorreta.</span>'; return; }
+      if (!r.ok) throw new Error(r.motivo || 'erro');
+      $('#entrar').hidden = true; $('#painel').hidden = false;
+      $('#limite').textContent = r.limite;
+      var aparelhos = 0, cheias = 0;
+      $('#lista').innerHTML = r.fitas.map(function (f) {
+        var qtd = f.aparelhos.length; aparelhos += qtd; if (qtd >= r.limite) cheias++;
+        var primeiro = qtd ? Math.min.apply(null, f.aparelhos.map(function (a) { return a.primeiro; })) : null;
+        var ultimo = qtd ? Math.max.apply(null, f.aparelhos.map(function (a) { return a.ultimo; })) : null;
+        var pill = f.bloqueada ? '<span class="pill bloq">BLOQUEADA</span>'
+          : '<span class="pill' + (qtd >= r.limite ? ' cheia' : '') + '">' + qtd + ' / ' + r.limite + '</span>';
+        return '<tr>' +
+          '<td class="num">Nº ' + n3(f.numero) + '</td>' +
+          '<td>' + pill + '</td>' +
+          '<td><small class="data">' + (primeiro ? data(primeiro) + '<br>' + data(ultimo) : '—') + '</small></td>' +
+          '<td><div class="acoes">' +
+            '<button class="ghost" data-liberar="' + f.numero + '"' + (qtd ? '' : ' disabled') + '>LIBERAR</button>' +
+            '<button class="red" data-bloquear="' + f.numero + '" data-estado="' + (f.bloqueada ? '0' : '1') + '">' + (f.bloqueada ? 'DESBLOQUEAR' : 'BLOQUEAR') + '</button>' +
+          '</div></td></tr>';
+      }).join('');
+      $('#st-fitas').textContent = r.fitas.length;
+      $('#st-aparelhos').textContent = aparelhos;
+      $('#st-cheias').textContent = cheias;
+      $('#msg-lista').textContent = r.fitas.length ? '' : 'Nenhuma fita foi usada ainda.';
+    }).catch(function () {
+      $('#msg-lista').innerHTML = '<span class="erro">Não consegui falar com o servidor. Tente de novo.</span>';
+      $('#msg-entrar').innerHTML = '<span class="erro">Não consegui falar com o servidor.</span>';
+    });
+  }
+
+  function sair() {
+    senha = ''; try { sessionStorage.removeItem('gab3d.admin'); } catch (e) {}
+    $('#painel').hidden = true; $('#entrar').hidden = false; $('#senha').value = '';
+  }
+
+  $('#btn-entrar').addEventListener('click', function () {
+    senha = $('#senha').value;
+    try { sessionStorage.setItem('gab3d.admin', senha); } catch (e) {}
+    $('#msg-entrar').textContent = 'Entrando…';
+    carregar();
+  });
+  $('#senha').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('#btn-entrar').click(); });
+  $('#btn-atualizar').addEventListener('click', carregar);
+  $('#btn-sair').addEventListener('click', sair);
+
+  $('#lista').addEventListener('click', function (e) {
+    var lib = e.target.closest('[data-liberar]'), blq = e.target.closest('[data-bloquear]');
+    if (lib) {
+      var n = lib.dataset.liberar;
+      if (!confirm('Liberar os aparelhos da fita nº ' + n3(n) + '? O cliente vai poder conectar a fita de novo.')) return;
+      chama('/admin/liberar', { numero: +n }).then(carregar);
+    } else if (blq) {
+      var m = blq.dataset.bloquear, bloquear = blq.dataset.estado === '1';
+      if (!confirm((bloquear ? 'Bloquear' : 'Desbloquear') + ' a fita nº ' + n3(m) + '?')) return;
+      chama('/admin/bloquear', { numero: +m, bloqueada: bloquear }).then(carregar);
+    }
+  });
+
+  fetch('cartuchos.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+    api = (d.api || '').replace(/\/$/, '');
+    if (!api) { $('#msg-entrar').innerHTML = '<span class="erro">O endereço do servidor ainda não foi configurado em cartuchos.json.</span>'; return; }
+    if (senha) carregar();
+  });
+})();
+</script>
+</body>
+</html>
