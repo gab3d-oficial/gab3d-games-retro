@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "observacao": "Catálogo de cartuchos. Cada item vira um card na biblioteca e um link #/jogo/<id> para gravar no NFC. O 'id' NUNCA deve mudar depois que a tag for gravada.",
+  "observacao": "Catálogo de cartuchos. Cada item vira um card na biblioteca e um link #/jogo/<id> para gravar no NFC. O 'id' NUNCA deve mudar depois que a tag for gravada. 'botoes' define o controle do portátil: 2, 4 ou 6.",
   "jogos": [
     {
       "id": "cobrinha",
@@ -13,7 +13,8 @@
       "cor": "#1FB86A",
       "console": "GAB 3D",
       "autor": "Gab 3D",
-      "licenca": "Original Gab 3D"
+      "licenca": "Original Gab 3D",
+      "botoes": 2
     },
     {
       "id": "quebra-blocos",
@@ -26,7 +27,8 @@
       "cor": "#FF8A1A",
       "console": "GAB 3D",
       "autor": "Gab 3D",
-      "licenca": "Original Gab 3D"
+      "licenca": "Original Gab 3D",
+      "botoes": 2
     },
     {
       "id": "exemplo-homebrew",
@@ -42,7 +44,8 @@
       "console": "16-BIT",
       "autor": "Nome do autor",
       "licenca": "Ex.: CC-BY 4.0 / MIT / permissão por escrito (guarde o print)",
-      "fonte": "https://link-da-pagina-oficial-do-jogo"
+      "fonte": "https://link-da-pagina-oficial-do-jogo",
+      "botoes": 4
     }
   ]
 }

@@ -4,13 +4,13 @@
 
    Uso no jogo:
      GabInput.down.left            -> true enquanto segurado
-     GabInput.on('press', b => {}) -> botão apertado ('up','a','start'...)
+     GabInput.on('press', b => {}) -> botão apertado ('up','a','b','c','x','y','z','start'...)
      GabInput.on('release', b => {})
      GabInput.onPause(() => {})    -> app foi para segundo plano
    ========================================================= */
 (function () {
   'use strict';
-  var BOTOES = ['up', 'down', 'left', 'right', 'a', 'b', 'start', 'select'];
+  var BOTOES = ['up', 'down', 'left', 'right', 'a', 'b', 'c', 'x', 'y', 'z', 'start', 'select'];
   var down = {};
   BOTOES.forEach(function (b) { down[b] = false; });
   var ouv = { press: [], release: [], pause: [] };
@@ -30,9 +30,9 @@
   });
 
   var TECLAS = {
-    ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down',
-    ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
-    KeyX: 'a', KeyK: 'a', Space: 'a', KeyZ: 'b', KeyJ: 'b',
+    ArrowUp: 'up', ArrowDown: 'down',
+    ArrowLeft: 'left', ArrowRight: 'right',
+    KeyX: 'a', KeyK: 'a', Space: 'a', KeyZ: 'b', KeyJ: 'b', KeyS: 'x', KeyI: 'x', KeyA: 'y', KeyU: 'y', KeyC: 'c', KeyD: 'z',
     Enter: 'start', ShiftLeft: 'select', ShiftRight: 'select'
   };
   window.addEventListener('keydown', function (e) {

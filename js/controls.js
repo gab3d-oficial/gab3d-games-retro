@@ -1,6 +1,6 @@
 // =========================================================
 // controls.js — controle virtual (toque) + teclado
-// Botões padronizados: up, down, left, right, a, b, start, select
+// Botões padronizados: up, down, left, right, a, b, c, x, y, z, start, select
 // Multitoque: dá para segurar o direcional e apertar A ao mesmo tempo.
 // =========================================================
 
@@ -9,12 +9,12 @@ const estado = {};
 let ativo = false;
 
 const TECLAS = {
-  ArrowUp: 'up', KeyW: 'up',
-  ArrowDown: 'down', KeyS: 'down',
-  ArrowLeft: 'left', KeyA: 'left',
-  ArrowRight: 'right', KeyD: 'right',
+  ArrowUp: 'up',
+  ArrowDown: 'down',
+  ArrowLeft: 'left',
+  ArrowRight: 'right',
   KeyX: 'a', KeyK: 'a', Space: 'a',
-  KeyZ: 'b', KeyJ: 'b',
+  KeyZ: 'b', KeyJ: 'b', KeyS: 'x', KeyI: 'x', KeyA: 'y', KeyU: 'y', KeyC: 'c', KeyD: 'z',
   Enter: 'start',
   ShiftLeft: 'select', ShiftRight: 'select'
 };

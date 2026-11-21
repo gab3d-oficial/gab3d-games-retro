@@ -307,15 +307,47 @@ body[data-view="game"] { overflow: hidden; overscroll-behavior: none; position: 
 .dpad .right::after { border-left-color: #46506E; margin-left: 3px; }
 .dpad .d.is-down { background: #141A2B; box-shadow: inset 0 2px 0 rgba(0,0,0,.5); }
 
-.ab { grid-area: ab; justify-self: end; display: flex; gap: 14px; padding: 10px 8px; transform: rotate(-22deg); background: rgba(10,15,28,.07); border-radius: 999px; }
+.abxy {
+  grid-area: ab; justify-self: end; position: relative; isolation: isolate;
+  width: min(150px, 38vw); aspect-ratio: 1;
+  display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-template-areas: ". x ." "y . a" ". b .";
+}
+.abxy::before { content: ""; position: absolute; inset: -6%; border-radius: 50%; background: rgba(10,15,28,.07); z-index: -1; }
+.abxy .x { grid-area: x; } .abxy .y { grid-area: y; } .abxy .a { grid-area: a; } .abxy .b { grid-area: b; }
+.abxy .c, .abxy .z { display: none; }
+
+/* 2 botões: A e B grandes, na diagonal */
+[data-botoes="2"] .abxy { grid-template: repeat(2, 1fr) / repeat(2, 1fr); grid-template-areas: ". a" "b ."; width: min(140px, 36vw); }
+[data-botoes="2"] .abxy .x, [data-botoes="2"] .abxy .y { display: none; }
+[data-botoes="2"] .round { transform: scale(1.02); }
+[data-botoes="2"] .round.is-down { transform: scale(1.02) translateY(3px); }
+
+/* 6 botões: duas fileiras de 3, estilo controle de luta */
+[data-botoes="6"] .abxy {
+  aspect-ratio: 3 / 2; width: min(176px, 46vw); gap: 4px;
+  grid-template: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "x y z" "a b c";
+}
+[data-botoes="6"] .abxy::before { inset: -8% -6%; border-radius: 40px; }
+[data-botoes="6"] .abxy .c, [data-botoes="6"] .abxy .z { display: block; }
+[data-botoes="6"] .abxy .c { grid-area: c; } [data-botoes="6"] .abxy .z { grid-area: z; }
+[data-botoes="6"] .round { transform: scale(.98); font-size: 11px; }
+[data-botoes="6"] .round.is-down { transform: scale(.98) translateY(3px); }
+[data-botoes="6"] .abxy .x, [data-botoes="6"] .abxy .a { margin-top: 14%; }
+[data-botoes="6"] .abxy .z, [data-botoes="6"] .abxy .c { margin-top: -14%; }
+[data-botoes="6"] .dpad { width: min(124px, 31vw); }
 .round {
-  width: min(60px, 15.5vw); aspect-ratio: 1; border: 0; border-radius: 50%; cursor: pointer; touch-action: none;
+  width: 100%; aspect-ratio: 1; place-self: center; transform: scale(1.12); border: 0; border-radius: 50%; cursor: pointer; touch-action: none;
   font-family: var(--pixel); font-size: 13px; color: rgba(255,255,255,.92);
   box-shadow: inset 0 -4px 0 rgba(0,0,0,.25), 0 4px 0 rgba(0,0,0,.25);
 }
 .round.a { background: radial-gradient(circle at 35% 30%, #FFB466, var(--orange) 60%, #C8650A); }
 .round.b { background: radial-gradient(circle at 35% 30%, #6AA9FF, var(--blue) 60%, #1159C4); }
-.round.is-down { transform: translateY(3px); filter: brightness(.9); box-shadow: inset 0 -1px 0 rgba(0,0,0,.25), 0 1px 0 rgba(0,0,0,.25); }
+.round.x { background: radial-gradient(circle at 35% 30%, #FFFFFF, #E6ECF7 60%, #AEB9CF); color: #2B3550; }
+.round.y { background: radial-gradient(circle at 35% 30%, #4A5680, #2A3350 60%, #161C30); }
+.round.c { background: radial-gradient(circle at 35% 30%, #7DF5B4, #22C47A 60%, #138A53); }
+.round.z { background: radial-gradient(circle at 35% 30%, #B59BFF, #8A5CFF 60%, #5B33C4); }
+.round.is-down { transform: scale(1.12) translateY(3px); filter: brightness(.9); box-shadow: inset 0 -1px 0 rgba(0,0,0,.25), 0 1px 0 rgba(0,0,0,.25); }
 
 .meta-btns { grid-area: meta; display: flex; justify-content: center; gap: 22px; }
 .pill {
@@ -343,8 +375,9 @@ body[data-view="game"] { overflow: hidden; overscroll-behavior: none; position: 
   }
   .hh-controls { display: contents; }
   .dpad { justify-self: center; align-self: center; width: min(140px, 22vw, 50dvh); }
-  .ab { justify-self: center; align-self: center; }
-  .round { width: min(58px, 9vw, 20dvh); }
+  .abxy { justify-self: center; align-self: center; width: min(150px, 24vw, 55dvh); }
+  [data-botoes="2"] .abxy { width: min(140px, 22vw, 50dvh); }
+  [data-botoes="6"] .abxy { width: min(190px, 28vw, 70dvh); }
   .hh-bezel { height: 100%; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 20px; }
   .hh-screen { flex: 1 1 auto; min-height: 0; height: 100%; width: auto; max-width: 100%; }
   .hh-bezel-label, .kbd-hint { display: none; }

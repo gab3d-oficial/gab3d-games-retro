@@ -82,7 +82,7 @@
   </section>
 
   <!-- ===================== TELA DO JOGO ===================== -->
-  <section id="view-game" class="view" hidden>
+  <section id="view-game" class="view" data-botoes="4" hidden>
     <div class="handheld">
       <div class="hh-bar">
         <button class="hh-icon" id="btn-back" aria-label="Voltar para a biblioteca">◀</button>
@@ -123,15 +123,19 @@
           <button class="pill" data-btn="select" aria-label="Select">SELECT</button>
           <button class="pill" data-btn="start" aria-label="Start">START</button>
         </div>
-        <div class="ab">
-          <button class="round b" data-btn="b" aria-label="Botão B">B</button>
+        <div class="abxy">
+          <button class="round x" data-btn="x" aria-label="Botão X">X</button>
+          <button class="round y" data-btn="y" aria-label="Botão Y">Y</button>
+          <button class="round z" data-btn="z" aria-label="Botão Z">Z</button>
           <button class="round a" data-btn="a" aria-label="Botão A">A</button>
+          <button class="round b" data-btn="b" aria-label="Botão B">B</button>
+          <button class="round c" data-btn="c" aria-label="Botão C">C</button>
         </div>
       </div>
 
       <div class="hh-speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
-    <p class="kbd-hint">TECLADO: SETAS · X = A · Z = B · ENTER = START · SHIFT = SELECT</p>
+    <p class="kbd-hint">TECLADO: SETAS · X = A · Z = B · C = C · S = X · A = Y · D = Z · ENTER = START · SHIFT = SELECT</p>
   </section>
 
   <div id="toast" class="toast" role="status" hidden></div>

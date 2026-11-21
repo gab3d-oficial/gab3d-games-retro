@@ -104,6 +104,7 @@ function abrirJogo(jogo) {
   atual = jogo;
   jogando = false;
   mostrar('game');
+  $('#view-game').dataset.botoes = String(jogo.botoes);
   document.title = `${jogo.titulo} · Gab 3D Games`;
   $('#game-title').textContent = jogo.titulo.toUpperCase();
   $('#insert-cover').src = jogo.capa;

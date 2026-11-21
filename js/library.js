@@ -12,6 +12,7 @@ const PADRAO = {
   descricao: '',
   capa: 'assets/capas/padrao.svg',
   cor: '#1E7BFF',         // cor do cartucho na biblioteca
+  botoes: null,           // 2, 4 ou 6 botões no portátil (padrão: 2 para HTML5, 4 para ROM)
   console: 'GAB 3D',
   ativo: true
 };
@@ -24,6 +25,7 @@ export async function loadLibrary() {
   cache = (dados.jogos || [])
     .filter(j => j && j.id && j.titulo && j.caminho)
     .map(j => ({ ...PADRAO, ...j, id: String(j.id).toLowerCase().trim() }))
+    .map(j => ({ ...j, botoes: [2, 4, 6].includes(Number(j.botoes)) ? Number(j.botoes) : (j.tipo === 'rom' ? 4 : 2) }))
     .filter(j => j.ativo !== false);
   return cache;
 }

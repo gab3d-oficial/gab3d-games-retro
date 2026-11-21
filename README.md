@@ -5,7 +5,7 @@ Encoste o cartucho no celular → o jogo abre direto → toque em **JOGAR**.
 
 - 100% estático: roda grátis no **GitHub Pages** (ou Cloudflare Pages, Netlify, hospedagem paga).
 - Interface original inspirada nos consoles dos anos 90: console 16-bit na tela inicial e um portátil na tela de jogo.
-- Controle na tela com direcional de 8 direções, A, B, START e SELECT, e multitoque.
+- Controle na tela que se adapta a cada jogo: 2, 4 ou 6 botões (A B · A B X Y · A B C X Y Z), START, SELECT e multitoque.
 - Android e iPhone, em pé ou deitado. No computador também funciona pelo teclado.
 - Biblioteca carregada de um **JSON**: para adicionar jogos não precisa mexer no código.
 - Suporta **jogos HTML5** e **ROMs homebrew autorizadas** (via EmulatorJS).
@@ -154,9 +154,17 @@ Tags NTAG213 (144 bytes) bastam: o link ocupa menos de 60 bytes.
   "caminho": "games/meu-jogo/index.html",
   "cor": "#8A5CFF",
   "console": "GAB 3D",
-  "autor": "Gab 3D"
+  "autor": "Gab 3D",
+  "botoes": 4
 }
 ```
+
+`"botoes"` escolhe o controle que aparece no portátil para esse jogo:
+- `2`: A e B grandes. Bom para jogos simples.
+- `4`: A, B, X e Y em losango. Para plataforma, aventura e ROMs 16-bit.
+- `6`: duas fileiras, X Y Z em cima e A B C embaixo, no estilo dos controles de luta.
+
+No jogo, os botões chegam como `'a'`, `'b'`, `'c'`, `'x'`, `'y'`, `'z'`.
 
 5. Suba os arquivos. O cartucho aparece sozinho na biblioteca.
 
