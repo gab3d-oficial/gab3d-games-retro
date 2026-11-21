@@ -3,6 +3,20 @@
   "observacao": "Catálogo de cartuchos. Cada item vira um card na biblioteca e um link #/jogo/<id> para gravar no NFC. O 'id' NUNCA deve mudar depois que a tag for gravada. 'botoes' define o controle do portátil: 2, 4 ou 6.",
   "jogos": [
     {
+      "id": "cubo-aventura",
+      "titulo": "Cubo Aventura",
+      "descricao": "Plataforma com o cubo Gab 3D: pule nos nós de filamento, pegue moedas e chegue ao portal. 2 fases.",
+      "controles": "← → anda · A pula · segure B para correr",
+      "capa": "assets/capas/cubo-aventura.svg",
+      "tipo": "html5",
+      "caminho": "games/cubo-aventura/index.html",
+      "cor": "#1E7BFF",
+      "console": "GAB 3D",
+      "autor": "Gab 3D",
+      "licenca": "Original Gab 3D",
+      "botoes": 2
+    },
+    {
       "id": "cobrinha",
       "titulo": "Cobrinha Neon",
       "descricao": "Coma as frutas, cresça e não bata nas paredes. A fruta dourada vale 5 pontos.",
@@ -17,6 +31,20 @@
       "botoes": 2
     },
     {
+      "id": "pula-pixel",
+      "titulo": "Pula-Pixel",
+      "descricao": "Corra pela cidade à noite pulando blocos e desviando de drones. Quanto mais longe, mais rápido.",
+      "controles": "A pula (segure = mais alto) · ↓ abaixa",
+      "capa": "assets/capas/pula-pixel.svg",
+      "tipo": "html5",
+      "caminho": "games/pula-pixel/index.html",
+      "cor": "#8A5CFF",
+      "console": "GAB 3D",
+      "autor": "Gab 3D",
+      "licenca": "Original Gab 3D",
+      "botoes": 2
+    },
+    {
       "id": "quebra-blocos",
       "titulo": "Quebra-Blocos",
       "descricao": "Rebata a bolinha e destrua todos os blocos. A cada fase fica mais rápido.",
@@ -25,6 +53,20 @@
       "tipo": "html5",
       "caminho": "games/quebra-blocos/index.html",
       "cor": "#FF8A1A",
+      "console": "GAB 3D",
+      "autor": "Gab 3D",
+      "licenca": "Original Gab 3D",
+      "botoes": 2
+    },
+    {
+      "id": "invasores-gab",
+      "titulo": "Invasores Gab",
+      "descricao": "Ondas de robôs invadem a oficina. Atire, desvie e cace a nave misteriosa para ganhar pontos extras.",
+      "controles": "← → move · A atira · START pausa",
+      "capa": "assets/capas/invasores-gab.svg",
+      "tipo": "html5",
+      "caminho": "games/invasores-gab/index.html",
+      "cor": "#22C47A",
       "console": "GAB 3D",
       "autor": "Gab 3D",
       "licenca": "Original Gab 3D",
