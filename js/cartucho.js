@@ -43,7 +43,7 @@ export async function validar(codigo) {
   if (c.length < 6 || !(window.crypto && crypto.subtle)) return null;
   const d = await carregar();
   const numero = d.cartuchos[await sha256(d.sal + c)];
-  return typeof numero ==='number ? { codigo: c, numero } : null;
+  return typeof numero ==='number' ? { codigo: c, numero } : null;
 }
 
 /** Identificação aleatória deste aparelho (não tem nenhum dado pessoal). */
