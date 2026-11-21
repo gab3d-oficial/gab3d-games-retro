@@ -194,6 +194,19 @@ Os botões do portátil Gab 3D são enviados ao emulador.
 
 ---
 
+## Fitas com código (só joga quem tem o cartucho)
+
+- Cada fita tem um código único. O link gravado na tag é `https://gab3dgames.com.br/#/c/CODIGO`.
+- Ao encostar a fita, o site confere o código, mostra "Cartucho nº 027 conectado" e libera os jogos **naquele celular**.
+- Sem fita, a pessoa vê a biblioteca, mas a tela do jogo pede "INSIRA SEU CARTUCHO".
+- `cartuchos.json` guarda só a impressão digital (SHA-256) de cada código. Os códigos de verdade ficam na lista privada `lista-cartuchos-gab3d.csv`, que **nunca** deve ir para o GitHub.
+- **Bloquear uma fita** (por exemplo, se o link vazou): apague a linha dela em `cartuchos.json`. Ela para de funcionar em todos os celulares.
+- **Abrir o site para todos** (evento ou demonstração): mude `"exigirCartucho": true` para `false`.
+- **Mais fitas:** peça um novo lote. Os números continuam de onde pararam, e os códigos antigos seguem valendo.
+- Limitação: quem compartilha o link da própria fita passa o acesso junto. É uma proteção simples, para afastar o acesso casual.
+
+---
+
 ## 7. Custos: grátis × domínio × hospedagem paga
 
 | Opção | Endereço | Custo/ano | Observação |

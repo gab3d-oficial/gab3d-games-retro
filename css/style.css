@@ -82,6 +82,8 @@ button { font: inherit; color: inherit; }
   display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 999px;
   background: rgba(57,255,136,.08); box-shadow: inset 0 0 0 1px rgba(57,255,136,.25);
 }
+.top-pill:not(.on) { color: var(--orange); background: rgba(255,138,26,.08); box-shadow: inset 0 0 0 1px rgba(255,138,26,.3); }
+.top-pill:not(.on) i { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
 .top-pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: blink 1.2s steps(2) infinite; }
 
 .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 36px; align-items: center; padding: 26px 0 56px; }
@@ -199,7 +201,8 @@ footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(255,255
   .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 0; }
   .console { order: -1; max-width: 330px; }
   .how { grid-template-columns: 1fr; }
-  .top-pill { display: none; }
+  .top-pill { font-size: 7px; padding: 6px 8px; }
+  .brand-text b { display: none; }
   .brand-text { font-size: 16px; }
 }
 
@@ -268,6 +271,11 @@ body[data-view="game"] { overflow: hidden; overscroll-behavior: none; position: 
 .btn-play:active { transform: translateY(3px); box-shadow: 0 1px 0 #B55A05; animation: none; }
 @keyframes pulse { 50% { transform: scale(1.06); } }
 .insert-hint { font-family: var(--pixel); font-size: 7px; color: #6F7EA3; margin: 2px 0 0 !important; }
+.insert.bloqueado img { filter: grayscale(1) brightness(.5); }
+.insert-lock { display: flex; flex-direction: column; gap: 6px; align-items: center; margin-top: 6px; }
+.insert-lock b { font-family: var(--pixel); font-size: clamp(9px, 3vw, 12px); color: var(--orange); font-weight: 400; animation: blink 1.2s steps(2) infinite; }
+.insert-lock span { font-size: clamp(10px, 2.8vw, 12px); color: #AAB6D0; max-width: 28ch; line-height: 1.4; }
+body.sem-fita .cart-actions .btn-primary::before { content: "🔒"; }
 
 .hh-logo { grid-area: logo; display: flex; align-items: center; gap: 8px; font-family: var(--brand); font-size: 19px; line-height: 1; color: #2F3B63; letter-spacing: .04em; padding-left: 6px; }
 .hh-logo img { height: 24px; width: auto; image-rendering: pixelated; }

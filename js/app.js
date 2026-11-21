@@ -7,6 +7,7 @@ import { loadLibrary, findGame, cartridgeUrl } from './library.js';
 import { normalizeEntry, onRoute, go } from './router.js';
 import { initControls, onInput, setEnabled, releaseAll } from './controls.js';
 import * as player from './player.js';
+import * as cartucho from './cartucho.js';
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -15,6 +16,8 @@ let biblioteca = [];
 let atual = null;
 let jogando = false;
 let mudo = false;
+let exige = false;        // o site pede cartucho?
+let fita = null;          // { codigo, numero } da fita conectada neste celular
 try { mudo = localStorage.getItem('gab3d.mudo') === '1'; } catch (_) {}
 
 // ---------------- áudio ----------------
@@ -111,6 +114,11 @@ function abrirJogo(jogo) {
   $('#insert-cover').alt = `Capa de ${jogo.titulo}`;
   $('#insert-title').textContent = jogo.titulo.toUpperCase();
   $('#insert-desc').textContent = jogo.controles || jogo.descricao || '';
+  const bloqueado = exige && !fita;
+  $('#insert').classList.toggle('bloqueado', bloqueado);
+  $('#btn-play').hidden = bloqueado;
+  $('#insert-hint').textContent = bloqueado ? '' : 'ou aperte A / START';
+  $('#insert-lock').hidden = !bloqueado;
   const ins = $('#insert');
   ins.hidden = false;
   ins.style.animation = 'none'; void ins.offsetWidth; ins.style.animation = '';
@@ -121,6 +129,7 @@ function abrirJogo(jogo) {
 
 function iniciarJogo() {
   if (!atual || jogando) return;
+  if (exige && !fita) return;
   liberarAudio();
   jogando = true;
   $('#insert').hidden = true;
@@ -146,7 +155,47 @@ function fecharJogo() {
   if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
 }
 
+async function conectarFita(codigo) {
+  const ok = await cartucho.validar(codigo).catch(() => null);
+  const srv = ok ? await cartucho.ativarNoServidor(ok) : null;
+  if (ok && !srv.ok) {
+    avisoFita(srv.motivo, ok.numero);
+  } else if (ok) {
+    cartucho.salvar(ok);
+    fita = ok;
+    pintarFita();
+    liberarAudio();
+    toast(`🎮 Cartucho Gab 3D nº ${cartucho.numeroFormatado(ok.numero)} conectado! Escolha um jogo.`, 4200);
+  } else {
+    toast('Cartucho não reconhecido. Encoste de novo a fita Gab 3D.', 4500);
+  }
+  history.replaceState(null, '', location.pathname + '#/');   // tira o código da barra de endereço
+  fecharJogo();
+  mostrar('home');
+}
+
+function avisoFita(motivo, numero) {
+  const n = cartucho.numeroFormatado(numero);
+  if (motivo === 'limite') toast(`A fita nº ${n} já está conectada em 2 aparelhos. Para jogar em mais um, adquira outra fita Gab 3D.`, 8000);
+  else if (motivo === 'bloqueada') toast(`A fita nº ${n} está bloqueada. Fale com a Gab 3D.`, 7000);
+  else toast('Cartucho não reconhecido. Encoste de novo a fita Gab 3D.', 4500);
+}
+
+function pintarFita() {
+  const pill = $('#top-pill');
+  if (!pill) return;
+  if (fita) {
+    pill.classList.add('on');
+    pill.innerHTML = `<i></i>CARTUCHO Nº ${cartucho.numeroFormatado(fita.numero)}`;
+  } else if (exige) {
+    pill.classList.remove('on');
+    pill.innerHTML = '<i></i>INSIRA O CARTUCHO';
+  }
+  document.body.classList.toggle('sem-fita', exige && !fita);
+}
+
 async function trocarRota(rota) {
+  if (rota.view === 'cartucho') { await conectarFita(rota.codigo); return; }
   if (rota.view === 'game') {
     const jogo = findGame(biblioteca, rota.id);
     if (!jogo) {
@@ -226,6 +275,12 @@ function ligarInterface() {
 async function iniciar() {
   normalizeEntry();
   ligarInterface();
+  try {
+    exige = await cartucho.exigeCartucho();
+    fita = exige ? await cartucho.conectado() : null;
+    if (fita && fita.erro) { avisoFita(fita.erro, fita.numero); fita = null; }
+  } catch (_) { exige = false; }
+  pintarFita();
   try {
     biblioteca = await loadLibrary();
     renderBiblioteca();

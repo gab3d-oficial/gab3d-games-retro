@@ -14,8 +14,13 @@
     // aqui convertemos para o formato com # que o site entende.
     (function () {
       var p = location.pathname;
+      var base, k = p.indexOf('/c/');
+      if (k >= 0) {
+        base = p.slice(0, k + 1);
+        location.replace(base + '#/c/' + encodeURIComponent(p.slice(k + 3).replace(/\/+$/, '')));
+        return;
+      }
       var i = p.indexOf('/jogo/');
-      var base;
       if (i >= 0) {
         base = p.slice(0, i + 1);
         var slug = p.slice(i + 6).replace(/\/+$/, '');
