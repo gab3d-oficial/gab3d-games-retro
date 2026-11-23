@@ -1,5 +1,5 @@
 /* =========================================================
-   INVASORES GAB — jogo original Gab 3D
+   ROBO STRIKE (Invasores Gab) — jogo original Gab 3D
    Defenda a oficina dos robôs invasores. Tela 160x144.
    ← → move · A atira · START pausa
    ========================================================= */
@@ -274,8 +274,8 @@
     if (estado === 'titulo') {
       quadroAnim = Math.floor(relogio * 2) % 2;
       sprite('bico', 44, 22, COR.roxo); sprite('drone', 76, 22, COR.verde); sprite('cubo', 108, 22, COR.laranja);
-      F.draw(g, 'INVASORES', W / 2, 40, { escala: 2, cor: COR.verde, sombra: '#0B5A33', align: 'center' });
-      F.draw(g, 'GAB', W / 2, 54, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
+      F.draw(g, 'ROBO', W / 2, 40, { escala: 2, cor: COR.verde, sombra: '#0B5A33', align: 'center' });
+      F.draw(g, 'STRIKE', W / 2, 54, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
       F.draw(g, '= 30', 88, 82, { cor: COR.texto }); sprite('bico', 70, 81, COR.roxo);
       F.draw(g, '= 20', 88, 92, { cor: COR.texto }); sprite('drone', 70, 91, COR.verde);
       F.draw(g, '= 10', 88, 102, { cor: COR.texto }); sprite('cubo', 70, 101, COR.laranja);

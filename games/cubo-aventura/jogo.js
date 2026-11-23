@@ -1,5 +1,5 @@
 /* =========================================================
-   CUBO AVENTURA — jogo de plataforma original Gab 3D
+   CUBE QUEST (Cubo Aventura) — jogo de plataforma original Gab 3D
    O cubo Gab 3D atravessa a oficina até o portal.
    ← → anda · segure B corre · A pula · START pausa
    ========================================================= */
@@ -401,8 +401,8 @@
     var pisca = Math.floor(relogio * 2.5) % 2 === 0;
     if (estado === 'titulo') {
       painel(24, 92);
-      F.draw(g, 'CUBO', W / 2, 32, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
-      F.draw(g, 'AVENTURA', W / 2, 52, { escala: 2, cor: COR.branco, sombra: '#1E3A80', align: 'center' });
+      F.draw(g, 'CUBE', W / 2, 32, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
+      F.draw(g, 'QUEST', W / 2, 52, { escala: 2, cor: COR.branco, sombra: '#1E3A80', align: 'center' });
       F.draw(g, 'A PULA   B CORRE', W / 2, 72, { cor: COR.apagado, align: 'center' });
       F.draw(g, 'PULE NOS NOS DE FILAMENTO', W / 2, 82, { cor: COR.apagado, align: 'center' });
       if (pisca) F.draw(g, 'APERTE A OU START', W / 2, 96, { cor: COR.texto, align: 'center' });

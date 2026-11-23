@@ -4,7 +4,7 @@
   "jogos": [
     {
       "id": "cubo-aventura",
-      "titulo": "Cubo Aventura",
+      "titulo": "Cube Quest",
       "descricao": "Plataforma com o cubo Gab 3D: pule nos nós de filamento, pegue moedas e chegue ao portal. 2 fases.",
       "controles": "← → anda · A pula · segure B para correr",
       "capa": "assets/capas/cubo-aventura.svg",
@@ -18,7 +18,7 @@
     },
     {
       "id": "cobrinha",
-      "titulo": "Cobrinha Neon",
+      "titulo": "Neon Snake",
       "descricao": "Coma as frutas, cresça e não bata nas paredes. A fruta dourada vale 5 pontos.",
       "controles": "Direcional move · segure A para acelerar · START pausa",
       "capa": "assets/capas/cobrinha.svg",
@@ -32,7 +32,7 @@
     },
     {
       "id": "pula-pixel",
-      "titulo": "Pula-Pixel",
+      "titulo": "Pixel Dash",
       "descricao": "Corra pela cidade à noite pulando blocos e desviando de drones. Quanto mais longe, mais rápido.",
       "controles": "A pula (segure = mais alto) · ↓ abaixa",
       "capa": "assets/capas/pula-pixel.svg",
@@ -46,7 +46,7 @@
     },
     {
       "id": "quebra-blocos",
-      "titulo": "Quebra-Blocos",
+      "titulo": "Block Breaker",
       "descricao": "Rebata a bolinha e destrua todos os blocos. A cada fase fica mais rápido.",
       "controles": "Direcional move · A lança · segure B para correr",
       "capa": "assets/capas/quebra-blocos.svg",
@@ -60,13 +60,27 @@
     },
     {
       "id": "invasores-gab",
-      "titulo": "Invasores Gab",
+      "titulo": "Robo Strike",
       "descricao": "Ondas de robôs invadem a oficina. Atire, desvie e cace a nave misteriosa para ganhar pontos extras.",
       "controles": "← → move · A atira · START pausa",
       "capa": "assets/capas/invasores-gab.svg",
       "tipo": "html5",
       "caminho": "games/invasores-gab/index.html",
       "cor": "#22C47A",
+      "console": "GAB 3D",
+      "autor": "Gab 3D",
+      "licenca": "Original Gab 3D",
+      "botoes": 2
+    },
+    {
+      "id": "rio-rasante",
+      "titulo": "River Rush",
+      "descricao": "Voe rio acima com o avião Gab 3D: destrua barcos, helicópteros, jatos e pontes. Passe nos tanques para não ficar sem combustível.",
+      "controles": "← → desvia · ↑ acelera · ↓ freia · A atira",
+      "capa": "assets/capas/rio-rasante.svg",
+      "tipo": "html5",
+      "caminho": "games/rio-rasante/index.html",
+      "cor": "#39C3FF",
       "console": "GAB 3D",
       "autor": "Gab 3D",
       "licenca": "Original Gab 3D",

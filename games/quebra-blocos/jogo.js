@@ -1,5 +1,5 @@
 /* =========================================================
-   QUEBRA-BLOCOS — jogo original Gab 3D
+   BLOCK BREAKER (Quebra-Blocos) — jogo original Gab 3D
    Tela 160x144
    ========================================================= */
 (function () {
@@ -225,8 +225,8 @@
         g.fillStyle = LINHAS_COR[(l + Math.floor(relogio * 3)) % 5];
         g.fillRect(6 + c * 15, 22 + l * 7, 14, 6);
       }
-      F.draw(g, 'QUEBRA', W / 2, 52, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
-      F.draw(g, 'BLOCOS', W / 2, 72, { escala: 3, cor: COR.texto, sombra: '#1E3A80', align: 'center' });
+      F.draw(g, 'BLOCK', W / 2, 52, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
+      F.draw(g, 'BREAKER', W / 2, 72, { escala: 3, cor: COR.texto, sombra: '#1E3A80', align: 'center' });
       if (pisca) F.draw(g, 'APERTE A OU START', W / 2, 104, { cor: COR.texto, align: 'center' });
       F.draw(g, 'A LANCA  B CORRE', W / 2, 116, { cor: COR.apagado, align: 'center' });
       F.draw(g, 'RECORDE ' + recorde, W / 2, 128, { cor: COR.ouro, align: 'center' });

@@ -233,6 +233,6 @@ Trocar de hospedagem depois é simples: suba os mesmos arquivos e aponte o DNS.
 
 ---
 
-Jogos inclusos: **Cobrinha Neon** e **Quebra-Blocos**, criados para a Gab 3D, com gráficos e sons originais gerados por código.
+Jogos inclusos: **Cube Quest**, **Neon Snake**, **Pixel Dash**, **Block Breaker**, **Robo Strike** e **River Rush**, criados para a Gab 3D, com gráficos e sons originais gerados por código.
 Interface original Gab 3D, sem uso de marcas, logos ou assets de terceiros.
 EmulatorJS © seus autores (GPL-3.0), carregado via CDN apenas para homebrew autorizado.

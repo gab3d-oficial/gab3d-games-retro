@@ -1,5 +1,5 @@
 /* =========================================================
-   COBRINHA NEON — jogo original Gab 3D
+   NEON SNAKE (Cobrinha Neon) — jogo original Gab 3D
    Tela 160x144 · grade de 20x16 casas de 8px
    ========================================================= */
 (function () {
@@ -164,8 +164,8 @@
         g.fillStyle = k === 13 ? COR.cabeca : (k % 2 ? COR.corpo2 : COR.corpo1);
         g.fillRect(sx, sy, 7, 7);
       }
-      F.draw(g, 'COBRINHA', W / 2, 34, { escala: 3, cor: COR.corpo1, sombra: '#0B5A33', align: 'center' });
-      F.draw(g, 'NEON', W / 2, 56, { escala: 2, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
+      F.draw(g, 'NEON', W / 2, 34, { escala: 3, cor: COR.corpo1, sombra: '#0B5A33', align: 'center' });
+      F.draw(g, 'SNAKE', W / 2, 56, { escala: 2, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
       if (pisca) F.draw(g, 'APERTE A OU START', W / 2, 120, { cor: COR.texto, align: 'center' });
       F.draw(g, 'SEGURE A PARA ACELERAR', W / 2, 131, { cor: COR.apagado, align: 'center' });
     } else if (estado === 'pausa') {

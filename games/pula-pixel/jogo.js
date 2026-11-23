@@ -1,5 +1,5 @@
 /* =========================================================
-   PULA-PIXEL — jogo original Gab 3D
+   PIXEL DASH (Pula-Pixel) — jogo original Gab 3D
    Corrida infinita com o cubo Gab 3D. Tela 160x144.
    A / ↑ pula (segure para pular mais alto) · ↓ abaixa
    ========================================================= */
@@ -240,8 +240,8 @@
     var pisca = Math.floor(relogio * 2.5) % 2 === 0;
     if (estado === 'titulo') {
       painel(18, 78);
-      F.draw(g, 'PULA', W / 2, 26, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
-      F.draw(g, 'PIXEL', W / 2, 46, { escala: 3, cor: COR.branco, sombra: '#1E3A80', align: 'center' });
+      F.draw(g, 'PIXEL', W / 2, 26, { escala: 3, cor: COR.laranja, sombra: '#6A3300', align: 'center' });
+      F.draw(g, 'DASH', W / 2, 46, { escala: 3, cor: COR.branco, sombra: '#1E3A80', align: 'center' });
       if (pisca) F.draw(g, 'APERTE A OU START', W / 2, 72, { cor: COR.texto, align: 'center' });
       F.draw(g, 'A PULA   BAIXO ABAIXA', W / 2, 84, { cor: COR.apagado, align: 'center' });
     } else if (estado === 'pausa') {
